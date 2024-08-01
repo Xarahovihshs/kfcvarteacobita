@@ -62,9 +62,7 @@ class Browser:
             self.webdriver.close()
             self.webdriver.quit()
 
-    def browserSetup(
-        self,
-    ) -> WebDriver:
+    def browserSetup(self) -> WebDriver:
         options = webdriver.ChromeOptions()
         options.headless = self.headless
         options.add_argument(f"--lang={self.localeLang}")
@@ -189,10 +187,11 @@ class Browser:
 
         # Concatenate username and browser type for a plain text session ID
         sessionid = f"{self.username}"
+        sessionType = "Mobile" if self.mobile else "Desktop"
 
-        sessionsDir = sessionsDir / sessionid
-        sessionsDir.mkdir(parents=True, exist_ok=True)
-        return sessionsDir
+        sessionPath = sessionsDir / sessionid / sessionType
+        sessionPath.mkdir(parents=True, exist_ok=True)
+        return sessionPath
 
     def getCCodeLang(self, lang: str, geo: str) -> tuple:
         if lang is None or geo is None:
