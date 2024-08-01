@@ -203,7 +203,7 @@ class Browser:
                     if geo is None:
                         geo = nfo["country"]
             except Exception:  # pylint: disable=broad-except
-                return ("en", "US")
+                return ("en", "IN")
         return (lang, geo)
 
     def getChromeVersion(self) -> str:
